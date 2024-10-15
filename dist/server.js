@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 const app = express();
 // We need a database of quotes 
 const quotes = [
@@ -18,17 +19,8 @@ const quotes = [
     "JavaScript is the only language that runs in the browser. - Brendan Eich",
     "JavaScript is the only language that runs on the server and the client. - Brendan Eich"
 ];
-/*
-Route that sends back a random quote from the database
-- Create a GET route with the path of '/quote'
-- Your callback should reference the responseObj and use an underscore for the requestObj
-- Your code block should create a variable randomQuote that is assigned a random string from the quotes array
-- Use the responseObj.send method to send an object back with a property of quote that has the value of your randomQuote string
-i.e. - It sends back an object like the one below:
-{
-    quote: '[INSERT QUOTE HERE]'
-}
-*/
+// ALLOW OTHER DOMAINS TO MAKE REQUESTS TO OUR SERVER - MUST DO BEFORE WRITING ANY ROUTES 
+app.use(cors());
 // Random quote route
 // When a route sends back an array or an object, it is an API route 
 // When a route is an API route, you should prefix the path with '/api' 

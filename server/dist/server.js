@@ -28,16 +28,12 @@ app.get('/api/quote', (_, responseObj) => {
     };
     responseObj.send(randomQuote);
 });
-app.get('/', (_, responseObj) => {
-    responseObj.send('Hi there');
+app.get('/api/test', (_, responseObj) => {
+    responseObj.send({
+        message: 'this test route has changed'
+    });
 });
-app.get('/data', (_, responseObj) => {
-    const data = {
-        name: 'Nina',
-        age: 31
-    };
-    responseObj.send(data);
-});
+// start the server
 app.listen(3333, () => {
     console.log('Server started on port 3333');
 });

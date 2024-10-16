@@ -22,40 +22,24 @@ const quotes = [
 
 
 
-
-
 // Random quote route
 // When a route sends back an array or an object, it is an API route 
 // When a route is an API route, you should prefix the path with '/api' 
 app.get('/api/quote',  (_, responseObj) => {
     const pullQuote = quotes[Math.floor(Math.random() * quotes.length)];
-
     const randomQuote = {
         quote: pullQuote
     };
-
     responseObj.send(randomQuote);
 });
 
+app.get('/api/test', (_, responseObj) => {
+    responseObj.send({
+        message: 'this test route has changed'
+    })
+});
 
-
-app.get('/', (_, responseObj) => {
-    responseObj.send('Hi there');
-})
-
-
-
-app.get('/data', (_, responseObj) => {
-    const data = {
-        name: 'Nina',
-        age: 31
-    };
-
-    responseObj.send(data);
-})
-
-
-
+// start the server
 app.listen(3333, () => {
     console.log('Server started on port 3333');
 });

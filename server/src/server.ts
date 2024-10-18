@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3333;
 // Static Middleware: 
 // Allows the client access to an entire folder and all of the files within that folder
 // Creates a GET route for every file within the shared folder  
-app.use(express.static('../vite-project/dist'));
+app.use(express.static('../client/dist'));
 
 //Load in API routes 
 app.use(api_routes);

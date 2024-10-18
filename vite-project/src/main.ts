@@ -1,16 +1,33 @@
 import './style.css'
 
 const quoteBtn = document.querySelector('#quote-btn');
+const catInput = document.querySelector<HTMLInputElement>('#category-input');
 
 //Make an http GET request to our Express server route "/api/quote" and get back a quote
 async function getQuote() {
-  const resObj = await fetch('/api/quote');
+  const quoteOutput = document.querySelector<HTMLElement>('.quote');
+  const catInput = document.querySelector<HTMLInputElement>('#category-input');
+  const category = catInput?.value;
+  const resObj = await fetch(`/api/quote?cat=${category}`);
   // needs to be json to parse 
   const data = await resObj.json();
 
-  console.log(data);
+  if (data.quote && quoteOutput) {
+    quoteOutput.style.color = 'initial';
+    quoteOutput.innerText = data.quote;
+  } else if (data.message && quoteOutput) {
+    quoteOutput.style.color = 'red';
+    quoteOutput.innerText = data.message;
+  }
 }
 
-getQuote();
-
 quoteBtn?.addEventListener('click', getQuote);
+catInput?.addEventListener('keydown', (eventObj) => {
+  if (eventObj.key === 'Enter') {
+    getQuote();
+  }
+})
+
+// getQuote();
+
+// quoteBtn?.addEventListener('click', getQuote);
